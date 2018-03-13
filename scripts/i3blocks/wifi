@@ -1,0 +1,29 @@
+#!/bin/bash
+#SSID=$(nmcli device wifi | grep -e '*' | awk '{ if (! /SSID/) print $2 }')
+SSID=$(iwconfig mlan0 | grep "SSID" | sed -r 's/(.*\:)?"//g' | sed -r 's/\ $//')
+#ENABLED=$(nmcli radio wifi | grep enabled)
+ENABLED=$(dmesg | grep WLAN | grep active)
+#CONNECTED=$(nmcli connection show --active | grep mlan0)
+CONNECTED=$(netctl list | grep \* | awk '{print $2}')
+#echo -e "$SSID\n$ENABLED\n$CONNECTED"
+
+if [[ $ENABLED ]]
+then
+    if [[ $CONNECTED ]]
+    then
+#        STRENGTH=$(nmcli device wifi | grep -e '*' | awk '{ if (! /SSID/) print $7 }')
+        STRENGTH=$(iw dev mlan0 link | grep 'tx bitrate' | awk '{print $3" "$4}')
+        echo " $STRENGTH $SSID"
+    else
+        echo " No Wifi"
+    fi
+elif [ ! $ENABLED ]
+then
+    echo " Airplane Mode"
+    separator_block_width=3
+fi
+
+case $BLOCK_BUTTON in
+	1) termite -e nmtui ;;
+	3) sh ~/dotfiles/scripts/i3blocks/toggle_wifi.sh ;;
+esac
