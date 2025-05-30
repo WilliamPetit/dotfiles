@@ -3,7 +3,8 @@ set t_Co=256        " Use 256 Colors in terminal
 
 filetype off		              " required for Vundle
 set rtp+=~/.vim/bundle/Vundle.vim " set runtime path to include Vundle
-call vundle#begin()               " init Vundle
+" call vundle#begin()               " init Vundle
+call vundle#rc()               " init Vundle
 Plugin 'VundleVim/Vundle.vim'     " let Vundle manage Vundle, required
 Plugin 'vim-airline/vim-airline'
 Plugin 'morhetz/gruvbox'

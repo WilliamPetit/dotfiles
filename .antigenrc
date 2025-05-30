@@ -1,0 +1,58 @@
+# Load the oh-my-zsh library
+antigen use oh-my-zsh
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+
+antigen bundle git
+antigen bundle docker
+antigen bundle docker-compose
+#antigen bundle history
+antigen bundle vi-mode
+#antigen bundle history-substring-search
+antigen bundle mvn
+antigen bundle sudo # activate ESC twice
+antigen bundle common-aliases
+#antigen bundle ng
+antigen bundle npm
+antigen bundle kubectl
+antigen bundle kubectx
+antigen bundle helm
+antigen bundle command-not-found
+antigen bundle autojump
+antigen bundle brew
+antigen bundle common-aliases
+antigen bundle compleat
+antigen bundle git-extras
+antigen bundle macos
+antigen bundle postgres
+antigen bundle rsync
+antigen bundle web-search
+antigen bundle yarn
+antigen bundle agkozak/zsh-z
+antigen bundle conda-incubator/conda-zsh-completion
+
+#Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+#Auto suggestion like fish shell
+antigen bundle zsh-users/zsh-autosuggestions
+
+# Alias definitions.
+#if [ -f ~/.profile_aliases ]; then
+#    source ~/.profile_aliases
+#fi
+
+#Set name of the theme to load. Optionally, if you set this to "random"
+#it will load a random theme each time that oh-my-zsh is loaded.
+#See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+#antigen theme bhilburn/powerlevel9k powerlevel9k
+antigen theme romkatv/powerlevel10k
+#antigen theme https://github.com/denysdovhan/spaceship-zsh-theme spaceship
+#antigen theme robbyrussell
+
+#antigen use oh-my-zsh
+#source $HOME/.antigen/bundles/robbyrussell/oh-my-zsh/oh-my-zsh.sh
+
+antigen apply

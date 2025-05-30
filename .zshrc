@@ -1,91 +1,58 @@
-# Path to your oh-my-zsh installation.
-export ZSH=/home/wpetit/.oh-my-zsh
+export TERM="xterm-256color"
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster"
-DEFAULT_USER=wpetit
+#export ANTIGEN_AUTO_CONFIG=false
+#export ANTIGEN_BUNDLES=$HOME/.antigen/bundles
+#export POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k
 
-# Uncomment the following line to use case-sensitive completion.
-CASE_SENSITIVE="true"
+# load zsh plugins manager
+#source $HOME/opt/antigen.zsh
+# antigen path when using Homebrew:
+source $(brew --prefix)/share/antigen/antigen.zsh
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# Load Antigen configurations
+antigen init ~/.antigenrc
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+if [ -f ~/.powerlevel9k ]; then
+    source ~/.powerlevel9k
+fi
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+#echo "profile"
+if [ -f "$HOME/.profile" ] ; then
+    source "$HOME/.profile"
+fi
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+#echo "zsh_users"
+#if [ -f ~/.zsh_users ]; then
+#   source ~/.zsh_users
+#fi
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+#autoload -U +X bashcompinit && bashcompinit
+#complete -o nospace -C $HOME/bin/vault vault
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+#export SOPS_AGE_KEY_FILE=$HOME/.sops/privkey.age
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+PATH="/Users/wpetit/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/Users/wpetit/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/Users/wpetit/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/Users/wpetit/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/wpetit/perl5"; export PERL_MM_OPT;
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+# Load Angular CLI autocompletion.
+# source <(ng completion script)
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/wpetit/miniconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/wpetit/miniconda/etc/profile.d/conda.sh" ]; then
+        . "/Users/wpetit/miniconda/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/wpetit/miniconda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode)
-
-# User configuration
-
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/wpetit/.gem/ruby/2.3.0/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
-export QT_QPA_PLATFORMTHEME="qt5ct"
-
-source $ZSH/oh-my-zsh.sh
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-export EDITOR='vim'
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Aliases
-alias homestead='function __homestead() { (cd ~/Dev/vboxes/homestead && vagrant $*); unset -f __homestead; }; __homestead'
-alias n64=mupen64plus
-alias huhs="homestead up;homestead ssh"
-alias ta="tmux attach-session"
-alias tmux-resurrect="bash ~/dotfiles/scripts/tmux-resurrect.sh"
-
-source ~/.profile
-
-# Disable flow control commands (keeps C-s from freezing everything)
-stty start undef
-stty stop undef
